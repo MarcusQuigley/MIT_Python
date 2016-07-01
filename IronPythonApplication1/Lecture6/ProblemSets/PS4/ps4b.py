@@ -1,4 +1,4 @@
-from ps4a import *
+﻿from ps4a import *
 import time
 
 
@@ -23,12 +23,18 @@ def compChooseWord(hand, wordList, n):
 
     returns: string or None
     """
-    # BEGIN PSEUDOCODE <-- Remove this comment when you code this function; do your coding within the pseudocode (leaving those comments in-place!)
+    bestScore = 0
+    bestWord = ""
     # Create a new variable to store the maximum score seen so far (initially 0)
-
     # Create a new variable to store the best word seen so far (initially None)  
 
-    # For each word in the wordList
+    for word in wordList:
+        if (isValidWordinWordList(word, hand)):
+                wordScore = getWordScore(word, n)
+                if (wordScore > bestScore):
+                    bestScore = wordScore
+                    bestWord = word
+
 
         # If you can construct the word from your hand
         # (hint: you can use isValidWord, or - since you don't really need to test if the word is in the wordList - you can make a similar function that omits that test)
@@ -39,10 +45,26 @@ def compChooseWord(hand, wordList, n):
 
                 # Update your best score, and best word accordingly
 
-
+    if (bestScore>0):
+        return bestWord
+    else:
+        return None
     # return the best word you found.
 
+def testcompChooseWord(wordList):
+    print compChooseWord({'i': 3, 'k': 1, 'd': 1, 'n': 1}, wordList, 6)
+    print "----------------"
+    print compChooseWord({'a': 1, 'd': 2, 'i': 2, 'k': 1, 'o': 1, 'n': 1}, wordList, 8)
+    print "----------------"
 
+    print compChooseWord({'a': 1, 'd': 1, 'i': 1, 'k': 1, 'o': 1, 'n': 1, 'y': 1}, wordList, 7)
+    print "----------------"
+    print compChooseWord({'q': 1}, wordList, 1)
+    print "----------------"
+    print compChooseWord({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 6)
+    print "----------------"
+    print compChooseWord({'a': 2, 'c': 1, 'b': 1, 't': 1}, wordList, 5)
+    print "----------------"
 #
 # Problem #7: Computer plays a hand
 #
@@ -65,8 +87,47 @@ def compPlayHand(hand, wordList, n):
     wordList: list (string)
     n: integer (HAND_SIZE; i.e., hand size required for additional points)
     """
-    # TO DO ... <-- Remove this comment when you code this function
+    score = 0
+    handLength = n
+    while handLength > 0:
+        # As long as there are still letters left in the hand:
+        print "Current Hand: ",
+        displayHand(hand) 
+        # Display the hand
+        wordChosen = compChooseWord(hand, wordList, n) #str(raw_input("Enter word, or a '"'.'"' to indicate that you are finished: "))
+        if (wordChosen == None):
+            break
+        else:
+            wordScore = getWordScore(wordChosen, n)
+            score = score + wordScore
+            print '"' + wordChosen +  '"' + " earned " + str(wordScore) + " points.",
+            print "Total: " + str(score) + " points" + "\n"
+            # Update the hand
+            hand = updateHand(hand, wordChosen)
+            handLength = sum(hand.itervalues())
+                
+
+    # Game is over 
+    print "Total score: " + str(score) + " points."
+ 
     
+    
+def testcompPlayHand(wordList):
+    #print compPlayHand({'i': 3, 'k': 1, 'd': 1, 'n': 1}, wordList, 6)
+    #print "----------------"
+    #print compPlayHand({'a': 1, 'd': 2, 'i': 2, 'k': 1, 'o': 1, 'n': 1}, wordList, 8)
+    #print "----------------"
+
+    #compPlayHand({'a': 2, 'e': 2, 'i': 2, 'm': 2, 'n': 2, 't': 2}, wordList, 12)
+    #print "----------------"
+    #compPlayHand({'q': 1}, wordList, 1)
+    print "----------------"
+    compPlayHand({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 6)
+    print "----------------"
+    compPlayHand({'a': 1, 'p': 2, 's': 1, 'e': 1, 'l': 1}, wordList, 8)
+    print "----------------"
+    #compPlayHand({'a': 2, 'c': 1, 'b': 1, 't': 1}, wordList, 5)
+    #print "----------------"   
 #
 # Problem #8: Playing a game
 #
@@ -98,12 +159,21 @@ def playGame(wordList):
     # TO DO... <-- Remove this comment when you code this function
     print "playGame not yet implemented." # <-- Remove this when you code this function
 
+def isValidWordinWordList(word, hand):
+    wordAsDict = getFrequencyDict(word)  
+    for k,v in wordAsDict.iteritems():
+        if (hand.get(k, 0) < v):
+            return False
+    return True
         
+            
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
     wordList = loadWords()
-    playGame(wordList)
+    #testcompChooseWord(wordList)
+    testcompPlayHand(wordList)
+    #playGame(wordList)
 
 
