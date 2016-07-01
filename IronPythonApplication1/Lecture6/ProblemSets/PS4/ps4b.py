@@ -156,8 +156,48 @@ def playGame(wordList):
 
     wordList: list (string)
     """
-    # TO DO... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this when you code this function
+    hand={}
+    continuePlaying = True
+    while (continuePlaying):
+        optionChosen = str.lower(raw_input
+                           ("Enter n to deal a new hand, r to replay the last hand, or e to end game: " ))
+        if (optionChosen == 'n' or optionChosen == 'r'):
+            if (optionChosen == 'r'):
+                if (len(hand) ==0):
+                    print "You have not played a hand yet. Please play a new hand first!" + "\n"
+                    break
+                #else:
+                    #playHand(hand, wordList, HAND_SIZE)
+            choosePlayerType = True
+            while (choosePlayerType):
+                playerType = str.lower(raw_input
+                               ("\n" + "Enter u to have yourself play, c to have the computer play: "))
+                #if (optionChosen == 'n' or optionChosen == 'r'):
+                if (playerType == 'c' or playerType == 'u'):
+                    if (optionChosen == 'n'):
+                        hand = dealHand(HAND_SIZE)
+                        #playHand(hand, wordList, HAND_SIZE)
+                    else:
+                        if (len(hand) ==0):
+                            print "You have not played a hand yet. Please play a new hand first!" + "\n"
+                            break
+                    if (playerType == 'c'):
+                        compPlayHand(hand, wordList, HAND_SIZE)
+                    else:
+                        playHand(hand, wordList, HAND_SIZE)
+                    choosePlayerType = False
+                #else:
+                    #playHand(hand, wordList, HAND_SIZE)
+        elif (optionChosen == 'e'):
+            continuePlaying = False
+        else:
+            print "Invalid command." + "\n"
+
+  
+def testplayGame(wordList):
+    playGame(wordList)
+    print "YEEOHAO"
+
 
 def isValidWordinWordList(word, hand):
     wordAsDict = getFrequencyDict(word)  
@@ -173,7 +213,8 @@ def isValidWordinWordList(word, hand):
 if __name__ == '__main__':
     wordList = loadWords()
     #testcompChooseWord(wordList)
-    testcompPlayHand(wordList)
+    #testcompPlayHand(wordList)
+    testplayGame(wordList)
     #playGame(wordList)
 
 
