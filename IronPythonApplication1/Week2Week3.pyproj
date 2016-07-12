@@ -6,7 +6,7 @@
     <ProjectGuid>f8a996b1-e4de-4e70-a739-2934cbe03f2e</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Lecture6\ProblemSets\PS4\ps4b.py</StartupFile>
+    <StartupFile>Quiz1\Page8Problems.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -125,6 +125,26 @@
     <Compile Include="Lecture8\SimpleDivide.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Quiz1\Page3Problems.py" />
+    <Compile Include="Quiz1\Page2Problems.py" />
+    <Compile Include="Quiz1\Page1Problems.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quiz1\Page4Problems.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quiz1\Page5Problems.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quiz1\Page6Problems.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quiz1\Page7Problems.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Quiz1\Page8Problems.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Lecture4\" />
@@ -135,6 +155,7 @@
     <Folder Include="Lecture6\ProblemSets\PS4\" />
     <Folder Include="Lecture7\" />
     <Folder Include="Lecture8\" />
+    <Folder Include="Quiz1\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lecture7\BugTypes.png" />
