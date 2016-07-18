@@ -6,7 +6,7 @@
     <ProjectGuid>f8a996b1-e4de-4e70-a739-2934cbe03f2e</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Lecture10\Problem1.py</StartupFile>
+    <StartupFile>Lecture10\ProblemSet1.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -35,6 +35,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Lecture10\Problem1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture10\Problem2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture10\problem5.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture10\ProblemSet1.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lecture4\CCPayingMinimum.py">
@@ -129,6 +138,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lecture9\ComplexityClass.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture9\ExampleOfComplexity.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lecture9\LoopsandCounting.py">
