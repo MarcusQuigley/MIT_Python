@@ -1,4 +1,4 @@
-def f(x):
+﻿def f(x):
     for i in range(1000): #1000 - Constant
          ans = i
     for i in range(x):  # 2x - Linear
@@ -23,3 +23,16 @@ def genExponentialComplexity(L):
 
 
 print genExponentialComplexity([1,2])
+
+def LogdefnIntToString(i):  # - Log n
+    digits = '0123456789'
+    if i == 0:
+        return 0
+    result = ''
+    while i > 0:
+        result = digits[i%10] + result #strip off last digit of i
+        i = i/10                        # divide i by 10 ie remove last digit
+    return result
+
+
+print LogdefnIntToString(304203)
