@@ -84,20 +84,28 @@ class Hand(object):
         returns: Boolean (if the word was or was not made)
         """
         # Your code here
-        raise NotImplementedError()
+        if self.isValidWord(word):
+            newHand = self.hand.copy()
+            for letter in word:
+                newHand[letter] = newHand[letter] -1
+            self.hand = newHand
+            return True
+            #return newHand
+        else:
+            return False
 
     def isValidWord(self, wordChosen):
         #if len(wordChosen) > len(self.hand):
         #    return False
         wordList = list(wordChosen)
-        hand_keys = listOfKeys()# self.hand.keys()
+        hand_keys = self.listOfKeys()# self.hand.keys()
         for letter in wordList:
             try:
                 hand_keys.remove(letter)
             except:
                 return False
             
-        if (calculateLen() - len(wordChosen) <> hand_keys.count):
+        if (self.calculateLen() - len(wordChosen)) <> len(hand_keys):
             return False
 
         return True
@@ -107,7 +115,7 @@ class Hand(object):
         for letter in self.hand.keys():
             for j in range(self.hand[letter]):
                 listKeys.append(letter)
-        return listOfKeys
+        return listKeys
 
     
 myHand = Hand(7)
@@ -118,9 +126,11 @@ myHand.setDummyHand('aazzmsp')
 print myHand
 print myHand.calculateLen()
 
-#myHand.update('za')
+print myHand.update('try')
+
+print myHand.update('maap')
 
 #print myHand.isValidWord(myHand.hand,'wded')
-print myHand.isValidWord('wded')
+#print myHand.isValidWord('wded')
 
 print myHand
