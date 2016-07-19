@@ -6,7 +6,7 @@
     <ProjectGuid>f8a996b1-e4de-4e70-a739-2934cbe03f2e</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Lecture10\ProblemSet6.py</StartupFile>
+    <StartupFile>Lecture12\problem3.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -46,6 +46,27 @@
     <Compile Include="Lecture10\ProblemSet6.py" />
     <Compile Include="Lecture10\ProblemSet4.py" />
     <Compile Include="Lecture10\ProblemSet1.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture11\problem2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture11\problem3.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture11\problem4.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture11\problem5.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture11\problem6.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture12\problem2.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture12\problem3.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lecture4\CCPayingMinimum.py">
@@ -186,6 +207,8 @@
     <Folder Include="Lecture8\" />
     <Folder Include="Lecture9\" />
     <Folder Include="Lecture10\" />
+    <Folder Include="Lecture11\" />
+    <Folder Include="Lecture12\" />
     <Folder Include="Quiz1\" />
   </ItemGroup>
   <ItemGroup>

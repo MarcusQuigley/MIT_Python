@@ -291,7 +291,8 @@ def playHand(hand, wordList, n):
             break
         else:
             # Otherwise (the input is not a single period):
-            if (not  isValidWord(wordChosen, hand, wordList) ):
+            if (not  
+(wordChosen, hand, wordList) ):
                 # If the word is not valid:
                 # Reject invalid word (print a message followed by a blank line)
                 print "Invalid word, please try again." + "\n"
