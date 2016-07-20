@@ -105,10 +105,16 @@ class Message(object):
         #pass #delete this line and replace with your code here
         cnt=0
         result={}
-        alphabet = list(string.ascii_lowercase + string.ascii_uppercase)
+        self.alphabet = list(string.ascii_lowercase + string.ascii_uppercase)
         #return (x + shift for x in alphabet)
-        for letter in alphabet:
-            result[letter] = (cnt) + shift
+        for letter in self.alphabet:
+            #shiftPosition = 0
+            lengthToShift = cnt + shift 
+            if lengthToShift > 51:
+                lengthToShift = lengthToShift - 52
+            #else:
+                #shiftPosition = lengthToShift
+            result[letter] = lengthToShift
             cnt += 1
                 
         return result
@@ -124,8 +130,28 @@ class Message(object):
 
         Returns: the message text (string) in which every character is shifted
              down the alphabet by the input shift
+
+             get codes from 
+
         '''
-        pass #delete this line and replace with your code here
+        try:
+            indexedMessages = []
+            for char in self.message_text:
+                indexedMessages.append(self.alphabet.index(char))
+        except StandardError as error:
+            print error.message
+            return []
+ 
+        messageShifted = []
+        shiftDict = self.build_shift_dict(shift)
+        for i in range(len(indexedMessages)):
+           for k,v in shiftDict.iteritems():
+               if (v == indexedMessages[i]):
+                   messageShifted.append(k)
+                   break
+
+        return str(messageShifted)
+
 
 class PlaintextMessage(Message):
     def __init__(self, text, shift):
@@ -216,9 +242,11 @@ class CiphertextMessage(Message):
         '''
         pass #delete this line and replace with your code here
 
+shift = 2
 #Example test case (PlaintextMessage)
-plaintext = PlaintextMessage('hello', 2)
-print plaintext.build_shift_dict(3)
+plaintext = Message('hello')
+print plaintext.build_shift_dict(shift)
+print plaintext.apply_shift(shift)
 print 'Expected Output: jgnnq'
 
 #print 'Actual Output:', plaintext.get_message_text_encrypted()
