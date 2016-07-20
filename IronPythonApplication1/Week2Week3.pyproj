@@ -6,7 +6,7 @@
     <ProjectGuid>f8a996b1-e4de-4e70-a739-2934cbe03f2e</ProjectGuid>
     <ProjectHome>
     </ProjectHome>
-    <StartupFile>Lecture12\problem3.py</StartupFile>
+    <StartupFile>Lecture12\problem5.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -67,6 +67,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lecture12\problem3.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Lecture12\problem5.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Lecture4\CCPayingMinimum.py">
