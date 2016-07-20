@@ -103,13 +103,14 @@ class Message(object):
                  another letter (string). 
         '''
         #pass #delete this line and replace with your code here
-
+        cnt=0
         result={}
-        alphabet = string.ascii_lowercase() + string.ascii.uppercase()
+        alphabet = list(string.ascii_lowercase + string.ascii_uppercase)
         #return (x + shift for x in alphabet)
         for letter in alphabet:
-            result[letter] = alphabet[letter] + shift
-        
+            result[letter] = (cnt) + shift
+            cnt += 1
+                
         return result
 
     def apply_shift(self, shift):
@@ -217,10 +218,12 @@ class CiphertextMessage(Message):
 
 #Example test case (PlaintextMessage)
 plaintext = PlaintextMessage('hello', 2)
+print plaintext.build_shift_dict(3)
 print 'Expected Output: jgnnq'
-print 'Actual Output:', plaintext.get_message_text_encrypted()
+
+#print 'Actual Output:', plaintext.get_message_text_encrypted()
     
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('jgnnq')
-print 'Expected Output:', (24, 'hello')
-print 'Actual Output:', ciphertext.decrypt_message()
+#ciphertext = CiphertextMessage('jgnnq')
+#print 'Expected Output:', (24, 'hello')
+#print 'Actual Output:', ciphertext.decrypt_message()
