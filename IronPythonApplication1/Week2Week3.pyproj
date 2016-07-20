@@ -72,6 +72,7 @@
     <Compile Include="Lecture12\problem5.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Lecture12\ProblemSet6\ps6.py" />
     <Compile Include="Lecture4\CCPayingMinimum.py">
       <SubType>Code</SubType>
     </Compile>
@@ -200,6 +201,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Lecture12\ProblemSet6\" />
     <Folder Include="Lecture4\" />
     <Folder Include="FirstPrograms\" />
     <Folder Include="Lecture5\" />
