@@ -102,21 +102,19 @@ class Message(object):
         Returns: a dictionary mapping a letter (string) to 
                  another letter (string). 
         '''
-        #pass #delete this line and replace with your code here
-        cnt=0
+             
         result={}
         self.alphabet = list(string.ascii_lowercase + string.ascii_uppercase)
-        #return (x + shift for x in alphabet)
-        for letter in self.alphabet:
-            #shiftPosition = 0
-            lengthToShift = cnt + shift 
-            if lengthToShift > 51:
-                lengthToShift = lengthToShift - 52
-            #else:
-                #shiftPosition = lengthToShift
-            result[letter] = lengthToShift
-            cnt += 1
-                
+ 
+        rangeLimit = len(self.alphabet)/2
+        for i in range(rangeLimit):
+            lengthToShift = i + shift
+            if lengthToShift > 25:
+                lengthToShift = lengthToShift - rangeLimit
+
+            result[self.alphabet[i]]  = self.alphabet[lengthToShift]
+            result[self.alphabet[i + rangeLimit]] = self.alphabet[lengthToShift + rangeLimit]
+        
         return result
 
     def apply_shift(self, shift):
@@ -134,21 +132,13 @@ class Message(object):
              get codes from 
 
         '''
-        try:
-            indexedMessages = []
-            for char in self.message_text:
-                indexedMessages.append(self.alphabet.index(char))
-        except StandardError as error:
-            print error.message
-            return []
  
         messageShifted = []
         shiftDict = self.build_shift_dict(shift)
-        for i in range(len(indexedMessages)):
-           for k,v in shiftDict.iteritems():
-               if (v == indexedMessages[i]):
-                   messageShifted.append(k)
-                   break
+
+        for i in range(len(self.message_text)):
+            if shiftDict.has_key(self.message_text[i]): #ignore non letters
+                messageShifted.append(shiftDict[self.message_text[i]])
 
         return str(messageShifted)
 
