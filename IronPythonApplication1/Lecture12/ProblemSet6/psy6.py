@@ -165,11 +165,7 @@ class PlaintextMessage(Message):
         #super(Message,self).__init__(text)
         self.shift = shift
         self.message_text_encrypted = ""
-        #self.encrypting_dict = {}
-        #self.encrypting_dict = self.build_shift_dict(self.shift)
         self.change_shift(self.shift)
-
-
 
     def get_shift(self):
         '''
@@ -222,7 +218,7 @@ class CiphertextMessage(Message):
             self.message_text (string, determined by input text)
             self.valid_words (list, determined using helper function load_words)
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
 
     def decrypt_message(self):
         '''
@@ -241,6 +237,34 @@ class CiphertextMessage(Message):
         and the decrypted message text using that shift value
         '''
         pass #delete this line and replace with your code here
+        validWords={}
+        for i in range(26):
+            shiftedword = self.apply_shift(i)
+            if shiftedword in self.valid_words:
+                validWords[i] = shiftedword
+                #return (i, self.message_text)
+                #return (i, shiftedword)
+   
+        return self.longest_word(validWords)
+
+        #return (shift, decryptedmessage)
+    def longest_word(self, dict_validWords):
+        if dict_validWords == None or len(dict_validWords) == 0:
+            return None
+        if len(dict_validWords)   == 1:
+            #val = 
+            return tuple(dict_validWords.iteritems().next())#, dict_validWords.itervalues().next())
+  
+        longest_word = ""
+        longest_shift = - 1
+        for k,v in dict_validWords.iteritems():
+            if len(v) > len(longest_word):
+                longest_word = v
+                longest_shift = k
+
+        if longest_shift != -1:
+            return tuple(longest_shift, longest_word)
+
 
 shift = 2
  
@@ -249,14 +273,14 @@ shift = 2
 #print message.apply_shift(shift)
 #'Expected Output: jgnnq'
 
-plaintext = PlaintextMessage('1.hello!!', shift)
-plaintext.change_shift(shift)
-print plaintext.get_encrypting_dict()
-print 'Actual Output:', plaintext.get_message_text_encrypted()
+#plaintext = PlaintextMessage('1.hello!!', shift)
+#plaintext.change_shift(shift)
+#print plaintext.get_encrypting_dict()
+#print 'Actual Output:', plaintext.get_message_text_encrypted()
 
 #Example test case (CiphertextMessage)
-#ciphertext = CiphertextMessage('jgnnq')
-#print 'Expected Output:', (24, 'hello')
-#print 'Actual Output:', ciphertext.decrypt_message()
+ciphertext = CiphertextMessage('jgnnq')
+print 'Expected Output:', (24, 'hello')
+print 'Actual Output:', ciphertext.decrypt_message()
 
 
