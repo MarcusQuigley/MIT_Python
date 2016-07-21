@@ -139,8 +139,8 @@ class Message(object):
         for i in range(len(self.message_text)):
             if shiftDict.has_key(self.message_text[i]): #ignore non letters
                 messageShifted.append(shiftDict[self.message_text[i]])
-
-        return str(messageShifted)
+        result = ''.join(messageShifted) 
+        return result
 
 
 class PlaintextMessage(Message):
@@ -245,3 +245,5 @@ print 'Expected Output: jgnnq'
 #ciphertext = CiphertextMessage('jgnnq')
 #print 'Expected Output:', (24, 'hello')
 #print 'Actual Output:', ciphertext.decrypt_message()
+
+
