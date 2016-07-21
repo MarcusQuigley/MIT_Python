@@ -139,6 +139,8 @@ class Message(object):
         for i in range(len(self.message_text)):
             if shiftDict.has_key(self.message_text[i]): #ignore non letters
                 messageShifted.append(shiftDict[self.message_text[i]])
+            else:
+                messageShifted.append(self.message_text[i])
         result = ''.join(messageShifted) 
         return result
 
@@ -268,10 +270,20 @@ class CiphertextMessage(Message):
 
 shift = 2
  
-#message = Message('hello')
-#print message.build_shift_dict(shift)
-#print message.apply_shift(shift)
-#'Expected Output: jgnnq'
+message = Message('hello')
+message.build_shift_dict(shift)
+print message.apply_shift(shift)
+print 'Expected Output: jgnnq'
+shift = 6
+message = Message('we are taking 6.00.1x')
+message.build_shift_dict(shift)
+print message.apply_shift(shift)
+print 'Expected Output: ks ofs hoywbu 6.00.1l'
+shift = 7
+message = Message('th!s is Problem Set 6?')
+message.build_shift_dict(shift)
+print message.apply_shift(shift)
+print 'Expected Output: jr ner gnxvat 6.00.1k'
 
 #plaintext = PlaintextMessage('1.hello!!', shift)
 #plaintext.change_shift(shift)
@@ -279,8 +291,8 @@ shift = 2
 #print 'Actual Output:', plaintext.get_message_text_encrypted()
 
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('jgnnq')
-print 'Expected Output:', (24, 'hello')
-print 'Actual Output:', ciphertext.decrypt_message()
+#ciphertext = CiphertextMessage('jgnnq')
+#print 'Expected Output:', (24, 'hello')
+#print 'Actual Output:', ciphertext.decrypt_message()
 
 
