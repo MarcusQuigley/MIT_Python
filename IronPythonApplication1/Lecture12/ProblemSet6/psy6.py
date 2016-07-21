@@ -161,7 +161,15 @@ class PlaintextMessage(Message):
         Hint: consider using the parent class constructor so less 
         code is repeated
         '''
-        pass #delete this line and replace with your code here
+        Message.__init__(self, text)
+        #super(Message,self).__init__(text)
+        self.shift = shift
+        self.message_text_encrypted = ""
+        #self.encrypting_dict = {}
+        #self.encrypting_dict = self.build_shift_dict(self.shift)
+        self.change_shift(self.shift)
+
+
 
     def get_shift(self):
         '''
@@ -169,7 +177,7 @@ class PlaintextMessage(Message):
         
         Returns: self.shift
         '''
-        pass #delete this line and replace with your code here
+        return self.shift
 
     def get_encrypting_dict(self):
         '''
@@ -177,7 +185,7 @@ class PlaintextMessage(Message):
         
         Returns: a COPY of self.encrypting_dict
         '''
-        pass #delete this line and replace with your code here
+        return self.encrypting_dict.copy() # set(self.encrypting_dict[:])
 
     def get_message_text_encrypted(self):
         '''
@@ -185,7 +193,7 @@ class PlaintextMessage(Message):
         
         Returns: self.message_text_encrypted
         '''
-        pass #delete this line and replace with your code here
+        return self.message_text_encrypted 
 
     def change_shift(self, shift):
         '''
@@ -198,7 +206,9 @@ class PlaintextMessage(Message):
 
         Returns: nothing
         '''
-        pass #delete this line and replace with your code here
+        self.shift = shift
+        self.encrypting_dict = self.build_shift_dict(self.shift)
+        self.message_text_encrypted = self.apply_shift(self.shift)
 
 
 class CiphertextMessage(Message):
@@ -233,14 +243,17 @@ class CiphertextMessage(Message):
         pass #delete this line and replace with your code here
 
 shift = 2
-#Example test case (PlaintextMessage)
-plaintext = Message('hello')
-print plaintext.build_shift_dict(shift)
-print plaintext.apply_shift(shift)
-print 'Expected Output: jgnnq'
+ 
+#message = Message('hello')
+#print message.build_shift_dict(shift)
+#print message.apply_shift(shift)
+#'Expected Output: jgnnq'
 
-#print 'Actual Output:', plaintext.get_message_text_encrypted()
-    
+plaintext = PlaintextMessage('1.hello!!', shift)
+plaintext.change_shift(shift)
+print plaintext.get_encrypting_dict()
+print 'Actual Output:', plaintext.get_message_text_encrypted()
+
 #Example test case (CiphertextMessage)
 #ciphertext = CiphertextMessage('jgnnq')
 #print 'Expected Output:', (24, 'hello')
