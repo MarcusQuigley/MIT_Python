@@ -53,6 +53,15 @@ def get_story_string():
     f.close()
     return story
 
+def decrypt_story():
+    """
+    Returns: appropriate shift value and unencrypted story string.
+    """
+    ciphertext = CiphertextMessage(get_story_string())
+    return ciphertext.decrypt_message()
+     
+
+
 WORDLIST_FILENAME = 'words.txt'
 
 class Message(object):
@@ -318,8 +327,10 @@ shift = 2
 #print 'Actual Output:', plaintext.get_message_text_encrypted()
 
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('hello world!!')
-print 'Expected Output:', (24, '1.jgnnq!!')
-print 'Actual Output:', ciphertext.decrypt_message()
+#ciphertext = CiphertextMessage('hello world!!')
+#print 'Expected Output:', (24, '1.jgnnq!!')
+#print 'Actual Output:', ciphertext.decrypt_message()
+
+print decrypt_story()
 
 
