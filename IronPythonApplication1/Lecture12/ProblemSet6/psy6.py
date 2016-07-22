@@ -225,8 +225,12 @@ class CiphertextMessage(Message):
     def decrypt_message(self):
         '''
         Decrypt self.message_text by trying every possible shift value
-        and find the "best" one. We will define "best" as the shift that
+        and find the "best" one. 
+        
+        We will define "best" as the shift that
         creates the maximum number of real words when we use apply_shift(shift)
+        
+        
         on the message text. If s is the original shift value used to encrypt
         the message, then we would expect 26 - s to be the best shift value 
         for decrypting it.
@@ -238,52 +242,75 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
-        pass #delete this line and replace with your code here
         validWords={}
+        shiftWord={}
+        specialchars = self.special_chars(True)
         for i in range(26):
-            shiftedword = self.apply_shift(i)
-            if shiftedword in self.valid_words:
-                validWords[i] = shiftedword
-                #return (i, self.message_text)
-                #return (i, shiftedword)
-   
-        return self.longest_word(validWords)
+            shiftedword = self.apply_shift(i)  #TODO need to save the shiftedword somewhere within the validWords dic
+            shiftedwordList = shiftedword.split(' ') #TODO I can easily test longest_word() from here
+            for word in shiftedwordList:
+                word = word.translate(string.maketrans("",""), specialchars)
+                word = word.lower()
+                if word in self.valid_words:
+                    validWords[word] = i 
+            shiftWord[i] = shiftedword
+        return self.longest_word(validWords, shiftWord)
 
-        #return (shift, decryptedmessage)
-    def longest_word(self, dict_validWords):
+    def special_chars(self, ignore_spaces):
+        #string.punctuation, plus the space (' ') and all numerical characters (0 - 9) found in string.digits
+        result = ""
+        if ignore_spaces == False:
+            result = string.punctuation + ' ' + string.digits
+        else:
+            result = string.punctuation + (string.digits)
+        return result
+
+    def longest_word(self, dict_validWords, shiftWord):
         if dict_validWords == None or len(dict_validWords) == 0:
             return None
         if len(dict_validWords)   == 1:
-            #val = 
             return tuple(dict_validWords.iteritems().next())#, dict_validWords.itervalues().next())
   
-        longest_word = ""
-        longest_shift = - 1
-        for k,v in dict_validWords.iteritems():
-            if len(v) > len(longest_word):
-                longest_word = v
-                longest_shift = k
+        newdict={}
+        valueList = list(dict_validWords.itervalues())
+        try:
+            for k,v in dict_validWords.iteritems():
+                if newdict.has_key(v):
+                    newdict[v] = newdict[v] + 1
+                else:
+                    newdict[v] = 1 
+            #TODO just need to sort newdict by its values and get the key from the 1st record
+            # then create a tuple of the key and all its words from dict_validWords
+            largestkey = -1
+            largestvalue = max(newdict.itervalues())
+            for k,v in newdict.iteritems():
+                if v == largestvalue:
+                    largestkey = k
+                    break
+            if largestkey > -1: #now need to get the i=original message like 'hello world!'..
+                return tuple([largestkey, shiftWord[largestkey]])
 
-        if longest_shift != -1:
-            return tuple(longest_shift, longest_word)
+            return None
 
+        except Exception as error:
+            print("error: ", error)
 
 shift = 2
  
-message = Message('hello')
-message.build_shift_dict(shift)
-print message.apply_shift(shift)
-print 'Expected Output: jgnnq'
-shift = 6
-message = Message('we are taking 6.00.1x')
-message.build_shift_dict(shift)
-print message.apply_shift(shift)
-print 'Expected Output: ks ofs hoywbu 6.00.1l'
-shift = 7
-message = Message('th!s is Problem Set 6?')
-message.build_shift_dict(shift)
-print message.apply_shift(shift)
-print 'Expected Output: jr ner gnxvat 6.00.1k'
+#message = Message('hello')
+#message.build_shift_dict(shift)
+#print message.apply_shift(shift)
+#print 'Expected Output: jgnnq'
+#shift = 6
+#message = Message('we are taking 6.00.1x')
+#message.build_shift_dict(shift)
+#print message.apply_shift(shift)
+#print 'Expected Output: ks ofs hoywbu 6.00.1l'
+#shift = 7
+#message = Message('th!s is Problem Set 6?')
+#message.build_shift_dict(shift)
+#print message.apply_shift(shift)
+#print 'Expected Output: jr ner gnxvat 6.00.1k'
 
 #plaintext = PlaintextMessage('1.hello!!', shift)
 #plaintext.change_shift(shift)
@@ -291,8 +318,8 @@ print 'Expected Output: jr ner gnxvat 6.00.1k'
 #print 'Actual Output:', plaintext.get_message_text_encrypted()
 
 #Example test case (CiphertextMessage)
-#ciphertext = CiphertextMessage('jgnnq')
-#print 'Expected Output:', (24, 'hello')
-#print 'Actual Output:', ciphertext.decrypt_message()
+ciphertext = CiphertextMessage('hello world!!')
+print 'Expected Output:', (24, '1.jgnnq!!')
+print 'Actual Output:', ciphertext.decrypt_message()
 
 
